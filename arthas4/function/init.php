@@ -22,7 +22,7 @@
 	*/
 	 function url($param_str, $other_str = array()) { 
 		 $arr_params = explode('/', $param_str);
-		 $url = "/arthas4/index.php/".MODULE_NAME."/{$arr_params[0]}/{$arr_params[1]}";
+		 $url = $_SERVER['SCRIPT_NAME']."/".MODULE_NAME."/{$arr_params[0]}/{$arr_params[1]}";
 		 
 		 if ($other_str) {
 		/*	 $arr_params = explode('/', $other_str);
