@@ -4,7 +4,7 @@
 		    
 	*/
 		
-	class Mysqli_db{
+	class Db_Mysql{
 		private $con;
 		public $sql_record = array();
 		public $sql_status = array();
@@ -25,6 +25,7 @@
 			$sql : sqlÓï¾ä
 		*/
 		function query($sql) {
+			
 			set_time_limit(0);
 			$result = mysqli_query($this->con, $sql);
 			$this->sql_record[] = $sql; 

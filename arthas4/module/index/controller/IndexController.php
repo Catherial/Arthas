@@ -3,14 +3,14 @@
 	class IndexController {
 		
 		public function index() {
-			_print($_SERVER);
-			echo url("index/index2", array("id"=>"ds"));
-			?>
-			<form action="<?php echo url("index/index2", array("id"=>"ds"));?>">
-				<input type="text"/>
-				<input type="submit"/>
-			</form>
-			<?php
+			
+			$db = Db::db_factory("mysql");
+			$redis = Db::db_factory("redis");
+			
+			
+			
+			
+			echo $redis->get("test");
 		}
 		
 		public function index2() {
