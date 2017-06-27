@@ -1,4 +1,5 @@
 <?php
+	
 	/*
 		公共入口文件...
 		
@@ -6,6 +7,33 @@
 	
 	//防止被直接访问
 	defined ("ACCESS") or die ("access error");
+	
+
+	
+	/*
+		获取到pathinfo
+	*/
+	$pathinfo = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "";
+	$path_arr = explode('/', $pathinfo);
+	
+
+	/*
+	    获取模块,控制器,方法名
+	*/
+	
+	define ("MODULE_NAME", isset($path_arr[1]) && $path_arr[1] ? $path_arr[1] : "index");
+	define ("CONTROLLER_NAME", isset($path_arr[2]) && $path_arr[2] ? $path_arr[2] : "index");
+	define ("ACTION_NAME", isset($path_arr[3]) && $path_arr[3] ? $path_arr[3] : "index");
+	
+	/*
+	    将pathinfo中参数给予$_GET
+	*/
+	for ($i = 4; $i < count($path_arr); $i+=2) {
+
+		$_GET[$path_arr[$i]] = isset($path_arr[$i+1]) ? $path_arr[$i+1] : "";
+		
+	}
+	
 	
 	/*
 	   过滤参数
@@ -26,37 +54,6 @@
 	}
 	
 	
-	/*
-		获取到pathinfo
-	*/
-	$pathinfo = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "";
-	$path_arr = explode('/', $pathinfo);
-	
-	//print_r($path_arr);
-//	echo "<br/>";
-	 
-	/*
-	    获取模块,控制器,方法名
-	*/
-	
-	define ("MODULE_NAME", isset($path_arr[1]) && $path_arr[1] ? $path_arr[1] : "index");
-	define ("CONTROLLER_NAME", isset($path_arr[2]) && $path_arr[2] ? $path_arr[2] : "index");
-	define ("ACTION_NAME", isset($path_arr[3]) && $path_arr[3] ? $path_arr[3] : "index");
-	
-	/*
-	    将pathinfo中参数给予$_GET
-	*/
-	for ($i = 4; $i < count($path_arr); $i+=2) {
-
-		$_GET[$path_arr[$i]] = isset($path_arr[$i+1]) ? $path_arr[$i+1] : "";
-		
-	}
-	
-	//echo "MODULE_NAME: ".MODULE_NAME;
-	//echo "<BR/>CONTROLLER_NAME: ".CONTROLLER_NAME;
-	//echo "<br/>ACTION_NAME: ".ACTION_NAME. "<BR/>";
-	//print_r($_GET);
-	
 	
 	
 	/*
@@ -67,7 +64,8 @@
 	define ("MODULE_PATH", BASE_PATH . "/module/" . MODULE_NAME);
 	define ("CONTROLLER_PATH", MODULE_PATH . "/controller");
 	define ("MODEL_PATH", MODULE_PATH . "/model");
-	define ("VIEW_PATH", MODULE_PATH . "/view");
+	define ("VIEW_PATH", MODULE_PATH . "/view/" . CONTROLLER_NAME );
+	
 	
 	/* for test*/
 	define ("HTTP_MODULE_PATH", "http://localhost/Arthas4/module/" . MODULE_NAME);

@@ -25,11 +25,13 @@
 			$sql : sql语句
 		*/
 		function query($sql) {
-			
+			 
 			set_time_limit(0);
 			$result = mysqli_query($this->con, $sql);
+			
 			$this->sql_record[] = $sql; 
 			if ($result) {                 //sql语句是否执行成功
+			
 				if ($result === true) {   //insert,update,delete类型的语句
 					$this->sql_status[] = "insert,update,delete true";
 					return true;
@@ -39,6 +41,7 @@
 						$arr[] = $row;
 					}
 					$this->sql_status[] = "select true";
+					
 					return $arr;              //返回执行的结果
 				}
 			} else if($result === false) {
@@ -67,6 +70,15 @@
 			if (!$this -> con) {
 				die("连接错误: " . mysqli_connect_error()); 
 			}
+		}
+		/*
+		   显示当前实例查询过什么
+		*/
+		public function show_query() {
+			echo "<pre>";
+			print_r($this->sql_record);
+			print_r($this->sql_status);
+			echo "</pre>";
 		}
 		
 	}

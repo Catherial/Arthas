@@ -6,11 +6,14 @@
 		}
 		
 		public function index() {
-			$sql = "select * from test";
-			print_r($this->db_instance->query($sql));
+			 
+			 
 		}
 		
 		public function get_info() {
+			
+			
+			
 			
 		}
 	}
