@@ -1,0 +1,7 @@
+Version 1.00
+
+	Version 1.01: 
+	
+		1. 新增一个数据库工厂Db类
+		2. 新增一个Model类, 创建model直接继承该类可获得query方法来操作数据库
+		
